@@ -1,38 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+  font-family: 'Poppins', sans-serif;
+}
+body {
+  background: rgb(3, 0, 31);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  min-height: 100vh;
+}
+.sidebar {
+  flex: 3;
+  border-right: 1px solid white;
+}
+.main {
+  flex: 9;
+}
+.logo {
+  margin-right: 1rem;
+}
+.uppersidetop {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+.upperside {
+  border-bottom: 1px solid white;
+  padding: 2.5rem;
+  height: 70%;
+}
+.midbtn {
+  background: #5A4BFF;
+  border: none;
+  color: white;
+  padding: 1.5rem;
+  font-size: 1.5rem;
+  width: 25rem;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  border-radius: 0.5rem;
+  margin: 4rem auto;
+  cursor: pointer;
+}
+.addbtn {
+  height: 2rem;
+  padding-right: 1rem;
+}
+.query {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 1.5rem;
+  width: 25rem;
+  margin: 1rem auto;
+  border-radius: 0.5rem;
+  border: 0.5px solid white;
   color: white;
+  cursor: pointer;
 }
-
-.App-link {
-  color: #61dafb;
+.query>img {
+  margin-right: 2rem;
+  object-fit: cover;
+  height: 1.7rem;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.lowerside {
+  padding: 2rem;
+}
+.listicon {
+  margin: 0.75rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+}
+.listicon .logo {
+  margin: 0.5rem;
+  padding: 0.5rem;
 }
