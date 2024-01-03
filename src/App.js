@@ -8,18 +8,33 @@ import rocket from './assets/rocket.svg';
 import sendbtn from './assets/send.svg';
 import usericon from './assets/user.jpg';
 import gptimg from './assets/chatgptLogo.svg';
-// import { sendMsgToOpenAI } from './openai';
+import { sendMsgToOpenAI } from './openai';
 import { useState } from 'react';
 
 function App() {
 
   const [input , setInput] = useState("");
+  const [error, setError] = useState(null);
+  const [msg, setMsg] = useState([
+    {
+    text: "Hi, I'm ChatGPT",
+    isBot: true,
+  }
+]);
 
-  // const handleSend = async() => {
-  //   const res = await sendMsgToOpenAI(input)
-  //   console.log(res);
-
-  // }
+  const handleSend = async() => {
+    try{const res = await sendMsgToOpenAI(input)
+    setMsg([...msg,
+    {text: input, isBot:false},
+    {text: res, isBot:true}
+    ])}
+    catch (error) {
+    setError("Sorry, ChatGPT service is temporary down, as API used for this project is expired.");
+    }
+  }
+  const handleEnter = async (e)=>{
+    if (e.key === 'Enter') await handleSend();
+  }
 
   return (
     <div className="App">
@@ -35,7 +50,7 @@ function App() {
         <div className="lowerside">
          <div className="listicon"><img src={homei} alt="" className="logo" />Home</div>
          <div className="listicon"><img src={savedi} alt="" className="logo" />Saved</div>
-         <div className="listicon"><img src={rocket} alt="" className="logo" />Contact Harshal</div>
+         <div className="listicon"><img src={rocket} alt="" className="logo" /><a href='https://in.linkedin.com/in/harshal-bihade' target="blank">Contact Harshal</a></div>
         </div>
       </div>
       <div className="main">
@@ -44,12 +59,13 @@ function App() {
           <img className="chatimg" src={usericon} alt="" /> <p className="txt">Hi I'm Harshal, Want to ask you some questions</p>
          </div>
          <div className="chat bot">
-          <img className="chatimg" src={gptimg} alt="" /> <p className="txt">Hi I'm ChatGPT, Please ask any questions.If only one egg is available and we wish to be sure of obtaining the right result, the experiment can be carried out in only one way. Drop the egg from the first-floor window; if it survives, drop it from the second-floor window. Continue upward until it breaks. In the worst case, this method may require 100 droppings. Suppose 2 eggs are available. What is the least number of egg droppings that are guaranteed to work in all cases? The problem is not actually to find the critical floor, but merely to decide floors from which eggs should be dropped so that the total number of trials is minimized. </p>
+          <img className="chatimg" src={gptimg} alt="" /> <p className="txt">Hi I'm ChatGPT, Please ask any questions.. </p>
          </div>
         </div>
+        {error && <p className="error chat bot"><img className="chatimg" src={gptimg} alt="" />{error}</p>}
         <div className="chatfooter">
           <div className="inp">
-            <input type="text" name="" placeholder="Send a message" value={input} onChange={(e)=>setInput(e.target.value)}/><button className="send" >
+            <input type="text" name="" placeholder="Send a message" value={input} onKeyDown={handleEnter} onChange={(e)=>setInput(e.target.value)}/><button className="send" onClick={handleSend}>
               <img src={sendbtn} alt=""/>
             </button>
           </div>

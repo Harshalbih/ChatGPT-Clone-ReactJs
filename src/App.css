@@ -163,3 +163,10 @@ body {
 .chatfooter>p {
   margin: 2rem 0;
 }
+.error{
+  width: 69%;
+}
+a{
+  text-decoration: none;
+  color: #fff;
+}
